@@ -7,25 +7,34 @@
 <link rel="stylesheet" href="./CSS/loguin.css">
 </head>
 <body>
+  <!-- Carrinho animado -->
+  <!-- Ícone de carrinho discreto -->
+<div class="icon-cart">
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#f97316" viewBox="0 0 16 16">
+    <path d="M0 1a1 1 0 0 1 1-1h1.5a.5.5 0 0 1 .485.379L3.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L1.01 1.607 1 1H0zm5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+  </svg>
+</div>
+
+
+
   <div class="main-container">
     <!-- Lado esquerdo: Login -->
     <div class="form-container" id="login-container">
-     <h2>Bem-vindo à Lista de Compras</h2>
-<input type="email" id="loginEmail" placeholder="Seu Email">
-<input type="password" id="loginSenha" placeholder="Senha">
-<button onclick="login()">Entrar</button>
-<p>Não tem uma conta? <span onclick="toggleForm('cadastro')">Cadastre-se</span></p>
-
+      <h2>🛒 Bem-vindo à Lista de Compras</h2>
+      <input type="email" id="loginEmail" placeholder="Seu Email">
+      <input type="password" id="loginSenha" placeholder="Senha">
+      <button onclick="login()">Entrar</button>
+      <p>Não tem uma conta? <span onclick="toggleForm('cadastro')">Cadastre-se</span></p>
     </div>
 
     <!-- Lado direito: Cadastro -->
     <div class="form-container" id="cadastro-container">
-      <h2>Crie sua conta de compras</h2>
-<input type="text" id="cadNome" placeholder="Seu Nome">
-<input type="email" id="cadEmail" placeholder="Email">
-<input type="password" id="cadSenha" placeholder="Senha">
-<button onclick="cadastro()">Cadastrar</button>
-<p>Já tem uma conta? <span onclick="toggleForm('login')">Login</span></p>
+      <h2>📋 Crie sua conta de compras</h2>
+      <input type="text" id="cadNome" placeholder="Seu Nome">
+      <input type="email" id="cadEmail" placeholder="Email">
+      <input type="password" id="cadSenha" placeholder="Senha">
+      <button onclick="cadastro()">Cadastrar</button>
+      <p>Já tem uma conta? <span onclick="toggleForm('login')">Login</span></p>
     </div>
   </div>
 

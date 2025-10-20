@@ -26,6 +26,27 @@ body {
   width: 350px;
   text-align: center;
 }
+/* --- Animação do carrinho --- */
+/* Carrinho discreto no canto */
+.icon-cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: default;
+  animation: blinkCart 1.5s infinite alternate;
+  z-index: 10;
+}
+.icon-cart svg path {
+  fill: #131261;
+  animation: blinkCart 4.5s infinite alternate;
+}
+
+/* Animação de leve piscada / mudança de cor */
+@keyframes blinkCart {
+  0% { fill: #131261; transform: scale(1); }
+  50% { fill: #154afa; transform: scale(1.1); }
+  100% { fill: #131261; transform: scale(1); }
+}
 
 /* --- Títulos --- */
 .container h2 {

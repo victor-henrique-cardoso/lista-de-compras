@@ -7,19 +7,45 @@
 <link rel="stylesheet" href="./CSS/loguin.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginSenha" placeholder="Senha">
-    <button onclick=login()>Entrar</button>
+  <div class="main-container">
+    <!-- Lado esquerdo: Login -->
+    <div class="form-container" id="login-container">
+     <h2>Bem-vindo à Lista de Compras</h2>
+<input type="email" id="loginEmail" placeholder="Seu Email">
+<input type="password" id="loginSenha" placeholder="Senha">
+<button onclick="login()">Entrar</button>
+<p>Não tem uma conta? <span onclick="toggleForm('cadastro')">Cadastre-se</span></p>
 
-    <h2>Cadastro</h2>
-    <input type="text" id="cadNome" placeholder="Nome">
-    <input type="email" id="cadEmail" placeholder="Email">
-    <input type="password" id="cadSenha" placeholder="Senha">
-    <button onclick=cadastro()>Cadastrar</button>
+    </div>
+
+    <!-- Lado direito: Cadastro -->
+    <div class="form-container" id="cadastro-container">
+      <h2>Crie sua conta de compras</h2>
+<input type="text" id="cadNome" placeholder="Seu Nome">
+<input type="email" id="cadEmail" placeholder="Email">
+<input type="password" id="cadSenha" placeholder="Senha">
+<button onclick="cadastro()">Cadastrar</button>
+<p>Já tem uma conta? <span onclick="toggleForm('login')">Login</span></p>
+    </div>
   </div>
 
 <script src="./JS/loguin.js"></script>
+<script>
+function toggleForm(form) {
+  const login = document.getElementById('login-container');
+  const cadastro = document.getElementById('cadastro-container');
+
+  if(form === 'login') {
+    login.style.display = 'flex';
+    cadastro.style.display = 'none';
+  } else {
+    login.style.display = 'none';
+    cadastro.style.display = 'flex';
+  }
+}
+
+// Inicial: mostrar só login
+toggleForm('login');
+</script>
 </body>
 </html>

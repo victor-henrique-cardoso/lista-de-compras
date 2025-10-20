@@ -1,70 +1,25 @@
-<!-- index.html -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lista de Compras</title>
-  <link rel="stylesheet" href="../CSS/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Compras - Login</title>
+<link rel="stylesheet" href="./CSS/loguin.css">
 </head>
 <body>
-  
-  <div class="app" role="application" aria-label="Lista de compras">
-    <header>
-      <h1>🛒 Lista de Compras</h1>
-      <div class="controls">
-        <select id="filter">
-          <option value="all">Todos</option>
-          <option value="active">A comprar</option>
-          <option value="bought">Comprados</option>
-        </select>
-        <button id="clearAll" title="Limpar lista">Limpar</button>
-      </div>
-    </header>
+  <div class="container">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginSenha" placeholder="Senha">
+    <button onclick=login()>Entrar</button>
 
-    <div class="grid">
-      <section>
-        <div class="card">
-          <form id="addForm" onsubmit="return false" aria-label="Adicionar item">
-            <input id="itemName" type="text" placeholder="Nome do item (ex: Arroz)" required />
-            <input id="itemQty" type="number" min="1" value="1" style="width:80px" placeholder="quandidade"/>
-            <input id="itemPrice" type="number" min="0" step="0.01" placeholder="Preço (opcional)" style="width:120px" />
-            <button id="addBtn">Adicionar</button>
-          </form>
-
-          <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
-            <input id="search" type="text" placeholder="Procurar..." style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
-           
-          </div>
-
-          <div class="list" id="list" aria-live="polite"></div>
-        </div>
-      </section>
-
-      <aside>
-        <div class="card summary">
-          <div>
-            <div class="row"><div class="small">Itens totais</div><div id="totalItems" class="big">0</div></div>
-            <div class="row"><div class="small">Itens a comprar</div><div id="activeItems">0</div></div>
-            <div class="row"><div class="small">Itens comprados</div><div id="boughtItems">0</div></div>
-            <div class="row"><div class="small">Custo total estimado</div><div id="totalCost" class="big">R$ 0,00</div></div>
-          </div>
-
-          <div>
-            <div class="tools">
-              <button id="clearBought">Remover comprados</button>
-              <button id="sortAlpha">Ordenar A→Z</button>
-              <button id="sortAdded">Ordenar por adicionados</button>
-            </div>
-          </div>
-
-       
-        </div>
-      </aside>
-    </div>
-
+    <h2>Cadastro</h2>
+    <input type="text" id="cadNome" placeholder="Nome">
+    <input type="email" id="cadEmail" placeholder="Email">
+    <input type="password" id="cadSenha" placeholder="Senha">
+    <button onclick=cadastro()>Cadastrar</button>
   </div>
 
-  <script src="../JS/script.js"></script>
+<script src="./JS/loguin.js"></script>
 </body>
 </html>

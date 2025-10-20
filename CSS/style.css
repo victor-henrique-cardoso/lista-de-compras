@@ -116,7 +116,7 @@ form {
 form input[type=text],
 form input[type=number] {
   flex: 1;
-  padding: 10px 12px;
+  padding: 10px 10px;
   border-radius: 10px;
   border: none;
   background: rgba(255,255,255,0.05);
@@ -160,7 +160,7 @@ form button:hover {
 }
 
 .item:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0);
 }
 
 .item .left {
@@ -279,4 +279,52 @@ footer {
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+input, select, button {
+  background: rgba(255,255,255,0.05) !important;
+  color: #e6eef6 !important;
+  border: none !important;
+}
+
+
+
+/* Esconde os inputs de edição e o botão Salvar por padrão */
+.item .edit-inputs,
+.item .save-btn {
+  display: none;
+}
+
+/* Mostra os inputs de edição e o botão Salvar quando o item está no modo de edição */
+.item.editing .edit-inputs,
+.item.editing .save-btn {
+  display: flex; /* ou block, dependendo de como você quer que eles apareçam */
+  gap: 8px; /* Adicione um pequeno espaço entre os campos se necessário */
+  margin-top: 5px; /* Adicione um pequeno espaço acima dos campos */
+}
+
+/* Esconde o botão 'Editar' quando o item está no modo de edição */
+.item.editing .edit-btn {
+  display: none;
+}
+
+/* Estilo para agrupar os campos de edição (quantidade e preço) */
+.edit-inputs {
+    flex-direction: column; 
+    margin-bottom: 5px;
+}
+
+.edit-inputs input {
+    margin-bottom: 5px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1) !important;
+}
+
+/* Ajusta o contêiner de ações para ter espaço para os novos campos */
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px; /* Espaço entre o botão 'Salvar' e 'Excluir' */
 }

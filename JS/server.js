@@ -3,8 +3,9 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
+
 app.use(cors());
-app.use(express.json()); // ler JSON do front
+app.use(express.json());
 
 // Conexão com MariaDB
 const conn = mysql.createConnection({
@@ -16,26 +17,75 @@ const conn = mysql.createConnection({
 
 // --- Rotas ---
 
+const bcrypt = require('bcryptjs');
+
+// --- Cadastro ---
+app.post('/cadastro', async (req, res) => {
+  const { nome, email, senha } = req.body;
+
+  // Verifica se o email já existe
+  conn.query('SELECT * FROM usuarios WHERE email = ?', [email], async (err, results) => {
+    if (err) return res.status(500).json({ erro: 'Erro no servidor' });
+    if (results.length > 0) return res.status(400).json({ erro: 'Email já cadastrado' });
+
+    // Criptografa a senha
+    const senhaHash = await bcrypt.hash(senha, 10);
+
+    // Insere o usuário
+    conn.query(
+      'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)',
+      [nome, email, senhaHash],
+      (err, result) => {
+        if (err) return res.status(500).json({ erro: 'Erro ao cadastrar' });
+
+        // Aqui retornamos o ID junto
+        res.json({ msg: 'Usuário cadastrado com sucesso!', usuario_id: result.insertId });
+      }
+    );
+  });
+});
+
+// --- Login ---
+app.post('/login', (req, res) => {
+  const { email, senha } = req.body;
+
+  conn.query('SELECT * FROM usuarios WHERE email = ?', [email], async (err, results) => {
+    if (err) return res.status(500).json({ erro: 'Erro no servidor' });
+    if (results.length === 0) return res.status(400).json({ erro: 'Usuário não encontrado' });
+
+    const usuario = results[0];
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+
+    if (!senhaCorreta) return res.status(401).json({ erro: 'Senha incorreta' });
+
+    res.json({ msg: 'Login bem-sucedido', usuario_id: usuario.id });
+  });
+});
+
+
 // Pegar todos os itens
-app.get('/itens', (req, res) => {
-  conn.query('SELECT * FROM itens', (err, results) => {
+app.get('/itens/:usuario_id', (req, res) => {
+  const { usuario_id } = req.params;
+  conn.query('SELECT * FROM itens WHERE usuario_id = ?', [usuario_id], (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
 });
 
+
 // Adicionar item
 app.post('/itens', (req, res) => {
-  const { nome, quantidade, preco } = req.body;
+  const { nome, quantidade, preco, usuario_id } = req.body;
   conn.query(
-    'INSERT INTO itens (nome, quantidade, preco) VALUES (?, ?, ?)',
-    [nome, quantidade, preco],
+    'INSERT INTO itens (nome, quantidade, preco, usuario_id) VALUES (?, ?, ?, ?)',
+    [nome, quantidade, preco, usuario_id],
     (err, result) => {
       if (err) return res.status(500).send(err);
       res.json({ id: result.insertId, nome, quantidade, preco, comprado: false });
     }
   );
 });
+
 
 // Atualizar item (quantidade, preço ou comprado)
 app.put('/itens/:id', (req, res) => {
